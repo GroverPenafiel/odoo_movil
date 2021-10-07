@@ -42,24 +42,37 @@ class AuthOdooProvider extends ChangeNotifier {
       final cookie = response.headers.map['set-cookie'];
       final authResponse = OdooAuthResponseModel.fromJson(response.data);
 
-      _actualizarCookieSesion(cookie![0]);
-      user = new Usuario(
-          idUsuario: authResponse.result!.username == null
-              ? ''
-              : authResponse.result!.username!,
-          idIniciosesion: 0,
-          nombreCompleto: authResponse.result!.username == null
-              ? ''
-              : authResponse.result!.name!,
-          nombreUsuario: authResponse.result!.username!,
-          correoElectronico: authResponse.result!.username!,
-          modificarPassword: false);
-      authStatus = AuthOdooStatus.authenticated;
+      if (authResponse.error != null) {
+        authStatus = AuthOdooStatus.notAuthenticated;
+        this.cargando = false;
+        notifyListeners();
+        if (authResponse.error!.code == 200 &&
+            authResponse.error!.data!.message == 'Access Denied') {
+          NotificationService.showSnackbarError('Credenciales no validas');
+        } else {
+          NotificationService.showSnackbarError(
+              'Se produjo un error en el Servidor');
+        }
+      } else {
+        _actualizarCookieSesion(cookie![0]);
+        user = new Usuario(
+            idUsuario: authResponse.result!.username == null
+                ? ''
+                : authResponse.result!.username!,
+            idIniciosesion: 0,
+            nombreCompleto: authResponse.result!.username == null
+                ? ''
+                : authResponse.result!.name!,
+            nombreUsuario: authResponse.result!.username!,
+            correoElectronico: authResponse.result!.username!,
+            modificarPassword: false);
+        authStatus = AuthOdooStatus.authenticated;
 
-      NavigationService.replaceTo(Flurorouter.dashboardRoute);
+        NavigationService.replaceTo(Flurorouter.dashboardRoute);
 
-      this.cargando = false;
-      notifyListeners();
+        this.cargando = false;
+        notifyListeners();
+      }
     } on DioError catch (e) {
       {
         // final messageResponse = MessageResponse.fromMap(json);

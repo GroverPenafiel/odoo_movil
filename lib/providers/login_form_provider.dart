@@ -5,28 +5,6 @@ class LoginFormProvider extends ChangeNotifier {
 
   String email = '';
   String password = '';
-  List<String> _items = [
-    'Seleccione Regional',
-    'Oficina Nacional',
-    'La Paz',
-    'Cochabamba',
-    'Santa Cruz',
-    'Oruro',
-    'Potosi',
-    'Sucre',
-    'Tarija',
-    'Trinidad',
-    'Cobija',
-  ];
-  String _selectedItem = 'Seleccione Regional';
-
-  List<String> get items => _items;
-  String get selected => _selectedItem;
-
-  void setSelectedItem(String s) {
-    _selectedItem = s;
-    notifyListeners();
-  }
 
   bool validateForm() {
     if (formKey.currentState!.validate()) {

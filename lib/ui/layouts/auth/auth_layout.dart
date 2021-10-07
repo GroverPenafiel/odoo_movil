@@ -12,34 +12,36 @@ class AuthLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Scrollbar(
-        //isAlwaysShown: true,
-        child: ListView(
-          physics: ClampingScrollPhysics(),
-          children: [
-            AuthHeader(),
-            //Un container que simula ela sobmra de arriba
-            Container(
-                decoration: BoxDecoration(boxShadow: [
-                  BoxShadow(color: Colors.black),
-                  BoxShadow(
-                      color: Color(0xFF00193f), //Color(0xFF37393e),
-                      spreadRadius: 20.0,
-                      blurRadius: 20.0,
-                      offset: Offset(0, 15)),
-                ]),
-                child: Container(
-                    width: double.infinity,
-                    height: 20) // child widget, replace with your own
-                ),
-            (size.width > 1000)
-                //Desktop
-                ? _DesktopBody(child: child)
-                //Movil
-                : _MobileBody(child: child),
-            //Links
-            LinksBar()
-          ],
+      body: SafeArea(
+        child: Scrollbar(
+          //isAlwaysShown: true,
+          child: ListView(
+            physics: ClampingScrollPhysics(),
+            children: [
+              AuthHeader(),
+              //Un container que simula ela sobmra de arriba
+              Container(
+                  decoration: BoxDecoration(boxShadow: [
+                    BoxShadow(color: Colors.black),
+                    BoxShadow(
+                        color: Color(0xFF00193f), //Color(0xFF37393e),
+                        spreadRadius: 20.0,
+                        blurRadius: 20.0,
+                        offset: Offset(0, 15)),
+                  ]),
+                  child: Container(
+                      width: double.infinity,
+                      height: 20) // child widget, replace with your own
+                  ),
+              (size.width > 1000)
+                  //Desktop
+                  ? _DesktopBody(child: child)
+                  //Movil
+                  : _MobileBody(child: child),
+              //Links
+              LinksBar()
+            ],
+          ),
         ),
       ),
     );

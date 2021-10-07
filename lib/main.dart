@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:odoo_movil/api/dio_api.dart';
 import 'package:odoo_movil/providers/auth_odoo_provider.dart';
 import 'package:odoo_movil/providers/sidemenu_provider.dart';
 import 'package:odoo_movil/router/router.dart';
