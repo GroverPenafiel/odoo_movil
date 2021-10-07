@@ -42,7 +42,7 @@ class LoginView extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          SizedBox(height: size.width <= 400 ? 20 : 50),
+                          SizedBox(height: size.width <= 400 ? 50 : 50),
                           Text(
                             'Nombre de usuario',
                             textAlign: TextAlign.start,
@@ -91,41 +91,6 @@ class LoginView extends StatelessWidget {
                                 hint: '*******',
                                 label: 'Contraseña',
                                 icon: Icons.lock_outline),
-                          ),
-                          SizedBox(height: 20),
-                          Text(
-                            'Regional',
-                            textAlign: TextAlign.start,
-                            style: GoogleFonts.roboto(color: Color(0xFF393939)),
-                          ),
-                          SizedBox(height: 7),
-                          DropdownButtonFormField<String>(
-                            value: loginFormProvider.selected,
-                            icon: const Icon(Icons.arrow_downward),
-                            iconSize: 24,
-                            elevation: 16,
-                            style: const TextStyle(color: Colors.black),
-                            onChanged: (value) {
-                              loginFormProvider.setSelectedItem(value!);
-                            },
-                            decoration: CustomInputs.loginInputDecoration(
-                                hint: 'Regional',
-                                label: 'Regional',
-                                icon: Icons.map_outlined),
-                            validator: (value) {
-                              if (value == null || value.isEmpty)
-                                return 'Seleccione regional';
-                              if (value == 'Seleccione Regional')
-                                return 'Debe seleccionar una regional';
-                              return null;
-                            },
-                            items: loginFormProvider.items
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
                           ),
                           SizedBox(height: 20),
                           CustomOutlinedButton(

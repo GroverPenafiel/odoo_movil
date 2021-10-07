@@ -1,4 +1,5 @@
-const URL_API = "http://192.168.83.132:8069";
+const URL_API = "https://ideanueva.com";
+const DB_API = "ideanueva";
 
 const VERSION_API =
     "1.0.0"; //Versión que verfifica con el servicio de produccion

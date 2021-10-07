@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:odoo_movil/api/dio_api.dart';
+import 'package:odoo_movil/env/environment.dart';
 import 'package:odoo_movil/models/http/auth_response.dart';
 import 'package:flutter/material.dart';
 import 'package:odoo_movil/models/http/odoo_auth_response.dart';
@@ -32,11 +33,7 @@ class AuthOdooProvider extends ChangeNotifier {
 
     final data = {
       'jsonrpc': '2.0',
-      'params': {
-        'db': 'health',
-        'login': 'admin@admin.com',
-        'password': 'admin'
-      }
+      'params': {'db': DB_API, 'login': email, 'password': password}
     };
 
     try {
